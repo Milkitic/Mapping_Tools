@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using Onova;
 using Onova.Models;
 using Onova.Services;
+using Semver;
 
 namespace Mapping_Tools.Updater {
 
@@ -51,6 +53,14 @@ namespace Mapping_Tools.Updater {
 
         public async Task<bool> FetchUpdateAsync() {
             UpdatesResult = await updateManager.CheckForUpdatesAsync();
+            if (UpdatesResult.LastVersion is { } lastVersion)
+            {
+                var version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                var semver = SemVersion.Parse(version.InformationalVersion, SemVersionStyles.Any);
+                if (semver.Major < lastVersion.Major) return true;
+                if (semver.Minor < lastVersion.Minor) return true;
+                if (semver.Patch < lastVersion.Build) return true;
+            }
 
             return UpdatesResult.CanUpdate;
         }
