@@ -27,7 +27,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'   # 8.x SDK can build net5.0 projects
+          dotnet-version: '10.0.x'   # 10.x SDK
 
       - name: Cache NuGet
         uses: actions/cache@v4
@@ -40,21 +40,6 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore Mapping_Tools
-
-      # Update versions in installer scripts and .csproj using PowerShell regex
-      - name: Set version in Inno Setup (x86)
-        shell: pwsh
-        run: |
-          (Get-Content -Raw Installer_Script_x86.iss) `
-            -replace '(?<=#define\s+MyAppVersion\s+")\d+\.\d+\.\d+(?=")', "${env:VERSION}" `
-            | Set-Content Installer_Script_x86.iss -Encoding UTF8
-
-      - name: Set version in Inno Setup (x64)
-        shell: pwsh
-        run: |
-          (Get-Content -Raw Installer_Script_x64.iss) `
-            -replace '(?<=#define\s+MyAppVersion\s+")\d+\.\d+\.\d+(?=")', "${env:VERSION}" `
-            | Set-Content Installer_Script_x64.iss -Encoding UTF8
 
       - name: Set AssemblyVersion/FileVersion in csproj
         shell: pwsh
@@ -71,28 +56,16 @@ jobs:
       - name: Publish x64
         run: dotnet publish Mapping_Tools -c Release -r win-x64 --no-restore --self-contained false
 
-      - name: Install Inno Setup
-        shell: pwsh
-        run: choco install innosetup --yes
-
-      - name: Build x86 Installer
-        shell: pwsh
-        run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "Installer_Script_x86.iss"'
-
-      - name: Build x64 Installer
-        shell: pwsh
-        run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "Installer_Script_x64.iss"'
-
       - name: Zip x86 app
         shell: pwsh
         run: |
-          $outDir = "Mapping_Tools/bin/Release/net5.0-windows/win-x86/publish"
+          $outDir = "Mapping_Tools/bin/Release/net10.0-windows/win-x86/publish"
           Compress-Archive -Path "$outDir/*" -DestinationPath "$outDir/release.zip" -Force
       
       - name: Zip x64 app
         shell: pwsh
         run: |
-          $outDir = "Mapping_Tools/bin/Release/net5.0-windows/win-x64/publish"
+          $outDir = "Mapping_Tools/bin/Release/net10.0-windows/win-x64/publish"
           Compress-Archive -Path "$outDir/*" -DestinationPath "$outDir/release_x64.zip" -Force
 
       - name: Publish GitHub Release
@@ -103,7 +76,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            Mapping_Tools/bin/Release/net5.0-windows/win-x86/publish/release.zip
-            Mapping_Tools/bin/Release/net5.0-windows/win-x64/publish/release_x64.zip
-            **/mapping_tools_installer_x86.exe
-            **/mapping_tools_installer_x64.exe
+            Mapping_Tools/bin/Release/net10.0-windows/win-x86/publish/release.zip
+            Mapping_Tools/bin/Release/net10.0-windows/win-x64/publish/release_x64.zip
