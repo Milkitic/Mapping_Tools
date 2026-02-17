@@ -40,14 +40,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
-      - name: Restore dependencies
-        run: dotnet restore Mapping_Tools
-
       - name: Publish x86
-        run: dotnet publish Mapping_Tools -c Release -r win-x86 --no-restore --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true
+        run: dotnet publish Mapping_Tools -c Release -r win-x86 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true
       
       - name: Publish x64
-        run: dotnet publish Mapping_Tools -c Release -r win-x64 --no-restore --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true
+        run: dotnet publish Mapping_Tools -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true
 
       - name: Zip x86 app
         shell: pwsh
