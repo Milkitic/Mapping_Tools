@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,8 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <AssemblyVersion>1.12.27</AssemblyVersion>
-    <FileVersion>1.12.27</FileVersion>
     <AssemblyName>Mapping Tools</AssemblyName>
     <ApplicationIcon>Data\mt_icon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x86;x64</Platforms>
@@ -76,6 +74,10 @@
     <PackageReference Include="OsuMemoryDataProvider" Version="0.11.1" />
     <PackageReference Include="Overlay.NET" Version="1.0.2" />
     <PackageReference Include="VirtualizingWrapPanel" Version="2.3.2" />
+    <PackageReference Include="MinVer" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

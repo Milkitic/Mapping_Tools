@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Determine version from tag
         shell: pwsh
@@ -40,15 +42,6 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore Mapping_Tools
-
-      - name: Set AssemblyVersion/FileVersion in csproj
-        shell: pwsh
-        run: |
-          $p = "Mapping_Tools/Mapping_Tools.csproj"
-          $c = Get-Content -Raw $p
-          $c = $c -replace '(?<=<AssemblyVersion>)\d+\.\d+\.\d+', "${env:VERSION}"
-          $c = $c -replace '(?<=<FileVersion>)\d+\.\d+\.\d+', "${env:VERSION}"
-          $c | Set-Content $p -Encoding UTF8
 
       - name: Publish x86
         run: dotnet publish Mapping_Tools -c Release -r win-x86 --no-restore --self-contained false
