@@ -79,7 +79,7 @@ namespace Mapping_Tools.Components.ObjectVisualiser {
                 }
 
                 var firstTime = beatmap.HitObjects[0].Time;
-                const double approachTime = 1000;
+                //const double approachTime = 1000;
                 var circleSize = Beatmap.GetHitObjectRadius(beatmap.Difficulty["CircleSize"].DoubleValue);
                 var hitObjects = beatmap.HitObjects.Take(100).Reverse();
                 using var font = new Font(FontFamily.GenericSansSerif, (float) (circleSize * 0.6), FontStyle.Bold);

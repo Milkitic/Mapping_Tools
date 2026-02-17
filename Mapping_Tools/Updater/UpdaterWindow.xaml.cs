@@ -30,7 +30,7 @@ namespace Mapping_Tools.Updater {
 
         private async Task LoadReleaseNotes() {
             string responseString;
-            using (HttpResponseMessage response = await MainWindow.HttpClient.GetAsync("https://api.github.com/repos/OliBomby/Mapping_Tools/releases/latest")) {
+            using (HttpResponseMessage response = await MainWindow.HttpClient.GetAsync("https://api.github.com/repos/Milkitic/Mapping_Tools/releases/latest")) {
                 responseString = await response.Content.ReadAsStringAsync();
             }
             dynamic json = JsonConvert.DeserializeObject(responseString);

@@ -73,10 +73,10 @@ namespace Mapping_Tools.Classes.HitsoundStuff {
                                         }
 
                                         byte[] thisBuffer = new byte[thisWave.Length];
-                                        thisWave.Read(thisBuffer, 0, (int) thisWave.Length);
+                                        thisWave.ReadExactly(thisBuffer, 0, (int) thisWave.Length);
 
                                         byte[] otherBuffer = new byte[otherWave.Length];
-                                        otherWave.Read(otherBuffer, 0, (int) otherWave.Length);
+                                        otherWave.ReadExactly(otherBuffer, 0, (int) otherWave.Length);
 
                                         if (!thisBuffer.SequenceEqual(otherBuffer)) {
                                             continue;
