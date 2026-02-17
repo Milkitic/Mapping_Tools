@@ -60,6 +60,7 @@ namespace Mapping_Tools.Updater {
                 if (semver.Major < lastVersion.Major) return true;
                 if (semver.Minor < lastVersion.Minor) return true;
                 if (semver.Patch < lastVersion.Build) return true;
+                return false;
             }
 
             return UpdatesResult.CanUpdate;
