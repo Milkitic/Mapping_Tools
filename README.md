@@ -1,9 +1,12 @@
 # Mapping Tools [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/V7V2HPH5F) [![Github All Releases](https://img.shields.io/github/downloads/OliBomby/Mapping_Tools/total.svg)]()
 
+> Note
+> This repository is a fork of the upstream project [OliBomby/Mapping_Tools](https://github.com/OliBomby/Mapping_Tools) and has been migrated to .NET 10.
+> Releases are published as self-contained builds and do not require a separate .NET runtime.
+> To build from source, install the .NET 10 SDK.
+
 Mapping Tools is a collection of tools which help you create osu! beatmaps more easily! 
 [Website](https://mappingtools.github.io/)
-
-Requires [.NET 5 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
 
 <p align="left">
   <img src="https://i.imgur.com/7JqvlNY.png" alt="Mapping Tools logo"/>
